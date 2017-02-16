@@ -7,6 +7,7 @@ from itertools import chain
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from django.core.exceptions import ValidationError
 
 
@@ -114,7 +115,7 @@ class TimeStampedModel(models.Model):
     Provides automatic date_created and date_modified fields.
     """
     date_created = models.DateTimeField(blank=True, null=True, editable=False,
-                                        auto_now_add=True,
+                                        default=timezone.now,
                                         verbose_name=_('date created'))
     date_modified = models.DateTimeField(blank=True, null=True, editable=False,
                                          auto_now=True,
