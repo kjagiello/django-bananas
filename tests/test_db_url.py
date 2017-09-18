@@ -1,3 +1,5 @@
+from urllib.parse import quote
+
 from django.test import TestCase
 
 from bananas import url
@@ -36,4 +38,19 @@ class DBURLTest(TestCase):
             'PORT': 4242,
             'SCHEMA': 'tweetschema',
             'USER': 'joar',
+        })
+
+    def test_db_url_with_slashes(self):
+        name = quote('/var/db/tweets.sqlite', safe='')
+        conf = url.database_conf_from_url('sqlite3:///{0}'.format(name))
+
+        self.assertDictEqual(conf, {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': '/var/db/tweets.sqlite',
+            'USER': None,
+            'HOST': None,
+            'PORT': None,
+            'PARAMS': {},
+            'SCHEMA': None,
+            'PASSWORD': None,
         })

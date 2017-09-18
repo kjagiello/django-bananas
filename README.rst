@@ -103,7 +103,7 @@ Can be used to generate and store "safe" random bytes for authentication.
 URLSecretField
 ================================================================================
 
-An implementation of SecretField that generates an URL-safe base64 string 
+An implementation of SecretField that generates an URL-safe base64 string
 instead of a hex representation of the random bytes.
 
 
